@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql-ems:
+    image: mysql:8.0
+    container_name: ems-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ems_enterprise
+      MYSQL_USER: ems_admin
+      MYSQL_PASSWORD: ems_secure_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    # Using utf8mb4 is strictly required for Japanese character support (Kanji, Kana)
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+  # Redis Cache
+  redis-ems:
+    image: redis:7-alpine
+    container_name: ems-redis
+    ports:
+      - "6379:6379"
+
+  # RabbitMQ Message Broker
+  rabbitmq-ems:
+    image: rabbitmq:3-management-alpine
+    container_name: ems-rabbitmq
+    ports:
+      - "5672:5672"   # AMQP port
+      - "15672:15672" # Management UI (guest/guest)
+    environment:
+      RABBITMQ_DEFAULT_USER: ems_rabbit
+      RABBITMQ_DEFAULT_PASS: ems_rabbit_pass
+
+volumes:
+  mysql-data:
