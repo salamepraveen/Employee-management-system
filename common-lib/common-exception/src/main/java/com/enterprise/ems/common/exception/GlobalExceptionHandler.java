@@ -43,7 +43,7 @@ public class GlobalExceptionHandler {
     	}
     	
     	ApiResponse<Void> response=ApiResponse.error(CommonErrorCode.INVALID_PARAMETER.getCode(),"Validation failed");
-    	 // Note: You can add a 'details' field to ApiResponse if needed, 
+    	// Note: You can add a 'details' field to ApiResponse if needed, 
         // but keeping it simple here to match our initial DTO design.
     	
     	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
