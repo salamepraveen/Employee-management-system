@@ -1,0 +1,68 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: employee-service
+
+  # 
+  # Connect to Config Server FIRST.
+  # Config Server provides: datasource URL, JPA settings, logging, etc.
+  # 
+  # PRIORITY ORDER (higher overrides lower):
+  # 1. Command line arguments (--server.port=9090)
+  # 2. System environment variables
+  # 3. Config Server (employee-service.yml)
+  # 4. This local application.yml
+  # 
+  # So Config Server values OVERRIDE this file if there's a conflict.
+  # This file is a FALLBACK if Config Server is down.
+  #
+  cloud:
+    config:
+      uri: http://localhost:8888
+      # fail-fast=true = If Config Server is unreachable, FAIL immediately.
+      # Don't start with default/empty values.
+      fail-fast: false
+      # We set false during development so the service can start
+      # even without Config Server running.
+
+  # 
+  # LOCAL FALLBACK DATABASE CONFIG.
+  # If Config Server is not running, use these values.
+  # Config Server values (employee-service.yml) override these.
+  #
+  datasource:
+    url: jdbc:mysql://localhost:3306/ems_employees?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        default_schema: ems_employees
+
+# 
+# EUREKA REGISTRATION.
+# Employee-service registers itself with Eureka on startup.
+# Gateway then uses "lb://employee-service" to find this.
+#
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+    # 
+    # instance-id = Custom name shown in Eureka dashboard.
+    # Without this: Shows as "192.168.1.5:employee-service:8081" (ugly)
+    # With this: Shows as "employee-service:8081" (clean)
+    #
+    instance-id: ${spring.application.name}:${server.port}

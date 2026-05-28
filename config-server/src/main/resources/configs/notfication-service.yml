@@ -1,0 +1,38 @@
+server:
+  port: 8085
+
+spring:
+  # 
+  # Notification service might NOT need a database.
+  # It just receives events and sends emails/SMS.
+  # But we include datasource in case you want to log
+  # notification history to a DB.
+  #
+  datasource:
+    url: jdbc:mysql://localhost:3306/ems_notifications?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 10
+      idle-timeout: 300000
+      connection-timeout: 20000
+
+# 
+# Custom properties for notification service.
+#
+notification:
+  email:
+    # SMTP settings for sending emails.
+    # In production, use environment variables for password.
+    host: smtp.gmail.com
+    port: 587
+    username: your-email@gmail.com
+    password: your-app-password
+    from: noreply@enterprise.com
+  sms:
+    # SMS gateway settings (placeholder).
+    # Real services: Twilio, AWS SNS, etc.
+    provider: twilio
+    api-key: your-api-key

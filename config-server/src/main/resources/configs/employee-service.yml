@@ -1,0 +1,55 @@
+# 
+# user-service.yml = Config ONLY for user-service.
+# 
+# HOW DOES Config Server know this belongs to user-service?
+# By FILE NAME. The rule is: {service-name}.yml or {service-name}-{profile}.yml
+#
+# When user-service boots, it tells Config Server:
+# "Hi, I'm user-service, give me my config."
+# Config Server returns:
+#   1. application.yml (shared config)
+#   2. user-service.yml (this file, overrides shared if needed)
+#
+
+server:
+  port: 8081
+  # Each service needs a UNIQUE port.
+  # 8081 = user-service
+  # 8082 = auth-service
+  # 8083 = order-service
+  # etc.
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/ems_employees?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: root
+    # 
+    # HikariCP = The connection pool that Spring Boot uses by default.
+    # A connection pool keeps DB connections OPEN and REUSES them.
+    # Without it: Every query opens a new connection (slow!).
+    # With it: 10 connections are kept open and shared (fast!).
+    #
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimum-idle: 5    # Keep at least 5 connections open even when idle
+      maximum-pool-size: 20  # Never open more than 20 connections
+      idle-timeout: 300000    # Close idle connections after 5 minutes (300000ms)
+      connection-timeout: 20000  # Wait max 20 seconds to get a connection
+
+  jpa:
+    # 
+    # Package to scan for @Entity classes.
+    # Only scans entities in user-service, not auth-service entities.
+    # This prevents accidentally loading wrong entities.
+    #
+    properties:
+      hibernate:
+        # 
+        # Naming strategy = How Java class names map to DB table/column names.
+        # 
+        # SpringPhysicalNamingStrategy (default):
+        #   Java: firstName → DB: first_name  (camelCase → snake_case)
+        #   Java: UserService → DB: user_service
+        #
+        default_schema: ems_users

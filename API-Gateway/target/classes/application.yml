@@ -1,0 +1,92 @@
+server:
+  port: 8070
+
+spring:
+  application:
+    name: gateway
+
+  cloud:
+    config:
+      uri: http://localhost:8888
+
+  gateway:
+    routes:
+     
+      - id: auth-service
+        uri: lb://auth-service
+        predicates:
+          - Path=/api/auth/**
+      
+      - id: employee-service
+        uri: lb://employee-service
+        predicates:
+          - Path=/api/employees/**
+        filters:
+          - JwtAuth
+
+     
+      - id: attendance-service
+        uri: lb://attendance-service
+        predicates:
+          - Path=/api/attendance/**
+        filters:
+          - JwtAuth
+
+     
+      - id: leave-service
+        uri: lb://leave-service
+        predicates:
+          - Path=/api/leaves/**
+        filters:
+          - JwtAuth
+
+   
+      - id: payroll-service
+        uri: lb://payroll-service
+        predicates:
+          - Path=/api/payroll/**
+        filters:
+          - JwtAuth
+
+     
+      - id: notification-service
+        uri: lb://notification-service
+        predicates:
+          - Path=/api/notifications/**
+        filters:
+          - JwtAuth
+
+    globalcors:
+      cors-configurations:
+        '[/**]':
+          allowed-origins:
+            - "http://localhost:3000"
+            - "http://localhost:4200"
+          allowed-methods:
+            - GET
+            - POST
+            - PUT
+            - DELETE
+            - PATCH
+            - OPTIONS
+          allowed-headers:
+            - "*"
+          allow-credentials: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+
+
+jwt:
+  secret: my-super-secret-jwt-key-that-is-at-least-256-bits-long-for-hs256-algorithm
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.cloud.loadbalancer: DEBUG

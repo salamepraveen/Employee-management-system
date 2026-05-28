@@ -1,0 +1,42 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: auth-service
+
+  cloud:
+    config:
+      uri: http://localhost:8888
+      fail-fast: false
+
+  # Auth-service has its OWN database for user credentials.
+  # Separate from employee-service's database.
+  datasource:
+    url: jdbc:mysql://localhost:3306/ems_auth?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+
+# JWT configuration (used by auth-service to CREATE tokens)
+jwt:
+  secret: my-super-secret-jwt-key-that-is-at-least-256-bits-long-for-hs256-algorithm
+  expiration: 86400000

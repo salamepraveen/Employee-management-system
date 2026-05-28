@@ -1,0 +1,77 @@
+# 
+# application.yml = SHARED configuration.
+# 
+# ANY service that connects to Config Server gets these properties.
+# Individual service configs (user-service.yml etc) can OVERRIDE these.
+#
+# Think of it like this:
+#   application.yml     = Base class (shared for everyone)
+#   user-service.yml    = Child class (specific to user-service)
+#   Child overrides Base if there's a conflict.
+#
+
+spring:
+  jpa:
+    # 
+    # JPA settings used by ALL services that connect to a database.
+    # 
+    # hibernate.ddl-auto:
+    #   update  = Create tables if not exist, alter if schema changed
+    #            (SAFE for development, DANGEROUS for production)
+    #   create  = Drop and recreate tables on EVERY startup (DESTROYS DATA)
+    #   create-drop = Create on startup, drop on shutdown
+    #   validate = Only check if schema matches entities, don't change
+    #   none    = Do nothing (for production with manual migrations)
+    #
+    hibernate:
+      ddl-auto: update
+
+    # 
+    # show-sql = Print SQL queries to console.
+    # TRUE in dev (you can see what Hibernate is doing).
+    # FALSE in prod (too much noise, potential security risk).
+    #
+    show-sql: true
+
+    # 
+    # Properties prefixed with "hibernate." are passed directly to Hibernate.
+    # 
+    properties:
+      hibernate:
+        # Format SQL so it's readable in console:
+        #   BAD:  select u1_0.id,u1_0.name from users u1_0 where u1_0.id=?
+        #   GOOD: SELECT u1_0.id, u1_0.name FROM users u1_0 WHERE u1_0.id = ?
+        format_sql: true
+
+  jackson:
+    # 
+    # Jackson = Java's JSON library (included with Spring Boot).
+    # serialization.indent_output = Pretty-print JSON in responses.
+    # 
+    # TRUE  (dev): { "name": "John", "email": "john@test.com" }  ← easy to read
+    # FALSE (prod): {"name":"John","email":"john@test.com"}       ← less bandwidth
+    #
+    serialization:
+      indent-output: true
+
+    # 
+    # Write dates in ISO-8601 format: "2026-05-08T14:30:00"
+    # Without this, dates might serialize as timestamps (milliseconds).
+    #
+    default-property-inclusion: non_null
+
+logging:
+  level:
+    # 
+    # Set logging levels for specific packages.
+    # 
+    # DEBUG = Show everything (SQL queries, request details, etc.)
+    # INFO  = Show important events (startup, errors, warnings)
+    # WARN  = Show only warnings and errors
+    # 
+    # com.enterprise = Your own code
+    # org.hibernate.SQL = Hibernate SQL queries
+    # org.springframework.security = Spring Security events
+    #
+    com.enterprise: DEBUG
+    org.hibernate.SQL: DEBUG
