@@ -10,5 +10,5 @@ import com.ems.common.dto.ApiResponse;
 public interface EmployeeClient {
 		
 	@GetMapping("/api/employees/{id}")
-	ApiResponse<EmployeeDto> getEmployeeId(@PathVariable("id") Long id);
+	ApiResponse<EmployeeDto> getEmployeeById(@PathVariable("id") Long id);
 }

@@ -31,4 +31,7 @@ public class RegisterRequest {
 	private String password;
 	
 	private User.Role role;
+	
+	@NotBlank(message="Company ID is required")
+	private String companyId;
 }

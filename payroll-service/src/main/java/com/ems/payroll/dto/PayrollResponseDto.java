@@ -40,7 +40,7 @@ public class PayrollResponseDto {
 	private Integer workingDays;
 	private Integer leaveDays;
 	
-	private String Status;
+	private String status;
 	private LocalDateTime createdAt;
 	
 }

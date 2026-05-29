@@ -13,6 +13,6 @@ public class EmployeeDto {
 		private String lastName;
 		private String department;
 		private String position;
-		private Double Salary; // monthly base salary
+		private Double salary; // monthly base salary
 		private String status;
 }

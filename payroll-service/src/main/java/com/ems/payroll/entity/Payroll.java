@@ -2,6 +2,8 @@ package com.ems.payroll.entity;
 
 import java.time.LocalDateTime;
 
+import com.ems.common.enitity.BaseEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -22,7 +24,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Payroll {
+public class Payroll extends BaseEntity {
 		
 	@Column(name="employee_id",nullable=false)
 	private Long employeeId;

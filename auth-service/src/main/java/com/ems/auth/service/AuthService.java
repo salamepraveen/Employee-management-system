@@ -15,9 +15,12 @@ import com.ems.auth.dto.RegisterRequest;
 import com.ems.auth.entity.User;
 import com.ems.auth.repository.UserRepository;
 import com.ems.common.exception.BusinessException;
+import com.ems.common.exception.ResourceNotFoundException;
 
+import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 
+@Service
 public class AuthService {
 	
 		private final UserRepository userRepository;
@@ -55,6 +58,7 @@ public class AuthService {
 						.email(request.getEmail())
 						.password(hashedPassword)
 						.role(role)
+						.companyId(request.getCompanyId())
 						.build();
 			user = userRepository.save(user);
 			
@@ -93,10 +97,18 @@ public class AuthService {
 						.expiresIn(jwtService.getExpiration())
 						.username(user.getUsername())
 						.email(user.getEmail())
-						.role(user.getEmail())
+						.role(user.getRole().name())
 						.issuedAt(LocalDateTime.now())
 						.build();
 			
 		}
 
+		@Transactional
+		public void updateRole(Long userId, User.Role newRole) {
+			User user = userRepository.findById(userId)
+					.orElseThrow(() -> new ResourceNotFoundException("User", "id", userId));
+			
+			user.setRole(newRole);
+			userRepository.save(user);
+		}
 }
