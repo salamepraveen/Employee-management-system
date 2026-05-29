@@ -34,16 +34,15 @@
 
     <properties>
         <java.version>21</java.version>
-        <!-- Spring Cloud version MUST match Spring Boot 3.2.x -->
+      
         <spring-cloud.version>2023.0.1</spring-cloud.version>
-        
-        <!-- Database -->
+ 
         <mysql-connector.version>8.3.0</mysql-connector.version>
         
-        <!-- JWT -->
+    
         <jjwt.version>0.12.5</jjwt.version>
         
-        <!-- MapStruct for DTO mapping -->
+    
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         
         <!-- All modules use these, so define once -->
