@@ -45,18 +45,14 @@
     
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         
-        <!-- All modules use these, so define once -->
+      
         <lombok.version>1.18.32</lombok.version>
     </properties>
 
-    <!-- 
-        dependencyManagement = defines versions but does NOT add them to classpath.
-        Child modules still need to declare <dependency> but WITHOUT <version>.
-        This prevents version conflicts across modules.
-    -->
+   
     <dependencyManagement>
         <dependencies>
-            <!-- Spring Cloud BOM - manages ALL spring-cloud dependencies -->
+          
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -65,7 +61,7 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- JWT libraries -->
+        
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt-api</artifactId>
