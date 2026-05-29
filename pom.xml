@@ -78,7 +78,7 @@
                 <version>${jjwt.version}</version>
             </dependency>
 
-            <!-- MapStruct -->
+  
             <dependency>
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct</artifactId>
