@@ -18,7 +18,6 @@
     <packaging>pom</packaging>
     <name>ems-parent</name>
 
- 
    <modules>
     <module>common</module>
     <module>discovery-server</module>
