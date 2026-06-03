@@ -57,13 +57,13 @@
             <artifactId>spring-cloud-config-client</artifactId>
         </dependency>
 
-        <!-- OpenFeign (to call employee-service) -->
+      
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
 
-        <!-- Lombok -->
+      
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
