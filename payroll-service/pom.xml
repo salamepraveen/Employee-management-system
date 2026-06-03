@@ -47,25 +47,25 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Eureka Client -->
+       
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
-        <!-- Config Client -->
+        
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-client</artifactId>
         </dependency>
 
-        <!-- OpenFeign (calls employee, attendance, leave services) -->
+      
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
 
-        <!-- Lombok -->
+       
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
