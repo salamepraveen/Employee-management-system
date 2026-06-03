@@ -15,78 +15,57 @@
     <name>Auth Service</name>
 
     <dependencies>
-        <!-- Common library (ApiResponse, exceptions) -->
+       
         <dependency>
             <groupId>com.ems</groupId>
             <artifactId>common</artifactId>
             <version>${project.version}</version>
         </dependency>
 
-        <!-- Spring Boot Web (REST API) -->
+  
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- 
-            Spring Security = Authentication & authorization framework.
-            
-            WHY do we need Spring Security in auth-service?
-            
-            For LOGIN: Spring Security provides AuthenticationManager.
-            It handles the process of:
-              1. Receiving username + password
-              2. Checking if password is correct
-              3. Returning an Authentication object (if correct)
-            
-            Without Spring Security, you'd have to:
-              - Manually load the user from DB
-              - Manually compare passwords (BCrypt)
-              - Manually build an Authentication object
-            
-            With Spring Security:
-              authenticationManager.authenticate(
-                  new UsernamePasswordAuthenticationToken(username, password)
-              );
-              // Spring Security does EVERYTHING — loads user, checks password, builds object
-        -->
+       
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <!-- Spring Data JPA (database access) -->
+        
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- Validation (request body validation) -->
+       
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
-        <!-- MySQL driver -->
+
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Eureka Client (service registration) -->
+       
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
-        <!-- Config Client -->
+      
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-client</artifactId>
         </dependency>
 
-        <!-- JWT libraries -->
+   
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
@@ -102,7 +81,7 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Lombok -->
+       
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
