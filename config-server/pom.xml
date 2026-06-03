@@ -15,14 +15,7 @@
     <name>Config Server</name>
 
     <dependencies>
-        <!--
-            Spring Cloud Config SERVER.
-            This is what MAKES this module a Config Server.
-            It provides the /{application-name}/{profile} endpoints.
-            
-            Compare with: spring-cloud-config-client (used by OTHER services
-            to connect TO this server).
-        -->
+        
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-server</artifactId>
