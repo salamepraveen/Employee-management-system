@@ -15,14 +15,14 @@
     <name>Payroll Service</name>
 
     <dependencies>
-        <!-- Common library -->
+       
         <dependency>
             <groupId>com.ems</groupId>
             <artifactId>common</artifactId>
             <version>${project.version}</version>
         </dependency>
 
-        <!-- Spring Boot Web -->
+        
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
