@@ -16,11 +16,7 @@
 
     <dependencies>
       
-        <dependency>
-            <groupId>com.ems</groupId>
-            <artifactId>common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+       
 
      
         <dependency>
